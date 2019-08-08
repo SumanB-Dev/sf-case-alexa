@@ -9,7 +9,7 @@ exports.CreateCase = (slots, session, response) => {
 
 exports.AnswerSubject = (slots, session, response) => {
     if (session.attributes.stage === "ask_subject") {
-        session.attributes.subject = slots.subject.value;
+        session.attributes.subject = slots.Subject.value;
         session.attributes.stage = "ask_description";
         response.ask("Allright! Now please give me brief description of your problem");
     } else {
@@ -19,7 +19,7 @@ exports.AnswerSubject = (slots, session, response) => {
 
 exports.AnswerDescription = (slots, session, response) => {
     if (session.attributes.stage === "ask_description") {
-        session.attributes.description = slots.description.value;
+        session.attributes.description = slots.Description.value;
         session.attributes.stage = "ask_priority";
         response.ask("What is priority for this ? High, Medium or Low");
     } 
@@ -30,7 +30,7 @@ exports.AnswerDescription = (slots, session, response) => {
     
 exports.AnswerPriority = (slots, session, response) => {    
     if (session.attributes.stage === "ask_priority") {
-        let priority = slots.priority.value;
+        let priority = slots.Priority.value;
         session.attributes.priority = priority;
 
 
