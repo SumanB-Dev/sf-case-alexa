@@ -1,6 +1,6 @@
-# DreamHouse Bot for Alexa
+# MyAssist Bot for Alexa
 
-A Salesforce-powered Alexa Skill for the DreamHouse sample application.
+A Salesforce-powered Alexa Skill for the MyAssist sample application.
 
 Follow the instructions below to create your own instance of the skill:
 
@@ -25,7 +25,7 @@ If you haven't already done so, follow the steps below to create a Salesforce co
     - Selected OAuth Scopes: Full Access (full)
     - Click **Save**
 
-### Step 3: Deploy the DreamHouse Alexa Skill
+### Step 3: Deploy the MyAssist Alexa Skill
 
 1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/)
 1. Click the button below to deploy the Alexa Skill on Heroku:
@@ -58,8 +58,8 @@ If you don't already have an AWS account, follow the steps below to create one:
 1. Fill in the **Skill Information** screen as follows:
 
     - Skill Type: **Custom Interaction Model**
-    - Name: **DreamHouse**
-    - Invocation Name: **dreamhouse**
+    - Name: **MyAssist**
+    - Invocation Name: **my assist**
     
 1. On the **Interaction Model** Screen:    
     - Paste the following JSON document in the **Intent Schema** box:
