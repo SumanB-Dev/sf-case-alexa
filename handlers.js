@@ -17,7 +17,7 @@ exports.AnswerSubject = (slots, session, response) => {
     }
 };
 
-exports.AnswerDesription = (slots, session, response) => {
+exports.AnswerDescription = (slots, session, response) => {
     if (session.attributes.stage === "ask_description") {
         session.attributes.description = slots.description.value;
         session.attributes.stage = "ask_priority";
