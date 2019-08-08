@@ -7,7 +7,7 @@
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Christophe Coenraets <ccoenraets@gmail.com> (http://coenraets.org/)",
+  "author": "Suman Banerjee <suman.banerjee4@cognizant.com>",
   "license": "ISC",
   "dependencies": {
     "alexa-nodekit": "^1.0.2",

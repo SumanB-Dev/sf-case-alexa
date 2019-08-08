@@ -2,32 +2,53 @@
 
 let salesforce = require("./salesforce");
 
-exports.SearchHouses = (slots, session, response) => {
-    session.attributes.stage = "ask_city";
-    response.ask("OK, in what city?");
+exports.CreateCase = (slots, session, response) => {
+    session.attributes.stage = "ask_subject";
+    response.ask("OK,Please help me with some information. Tell me the subjcet for the case");
 };
 
-exports.AnswerCity = (slots, session, response) => {
-    if (session.attributes.stage === "ask_city") {
-        session.attributes.city = slots.City.value;
-        session.attributes.stage = "ask_bedrooms";
-        response.ask("How many bedrooms?");
+exports.AnswerSubject = (slots, session, response) => {
+    if (session.attributes.stage === "ask_subject") {
+        session.attributes.subject = slots.Subject.value;
+        session.attributes.stage = "ask_description";
+        response.ask("Allright! Now please give me brief description of your problem");
     } else {
         response.say("Sorry, I didn't understand that");
     }
 };
 
-exports.AnswerNumber = (slots, session, response) => {
-    if (session.attributes.stage === "ask_bedrooms") {
-        session.attributes.bedrooms = slots.NumericAnswer.value;
-        session.attributes.stage = "ask_price";
-        response.ask("Around what price?");
-    } else if (session.attributes.stage === "ask_price") {
-        let price = slots.NumericAnswer.value;
-        session.attributes.price = price;
-        let priceMin = price * 0.8;
-        let priceMax = price * 1.2;
-        salesforce.findProperties({city: session.attributes.city, bedrooms: session.attributes.bedrooms, priceMin: priceMin, priceMax: priceMax})
+exports.AnswerDesription = (slots, session, response) => {
+    if (session.attributes.stage === "ask_description") {
+        session.attributes.description = slots.Description.value;
+        session.attributes.stage = "ask_priority";
+        response.ask("What is priority for this ? High, Medium or Low");
+    } 
+    else {
+        response.say("Sorry, I didn't understand that");
+    }
+    
+exports.AnswerPriority = (slots, session, response) => {    
+    if (session.attributes.stage === "ask_priority") {
+        let priority = slots.priority.value;
+        session.attributes.price = priority;
+
+
+        //build salesforce logic here
+        salesforce.createCase({subject: session.attributes.subject, description: session.attributes.description, priority: session.attributes.priority})
+            .then(case => {
+                if (case) {
+                    let text = `Now relax, your case has been logged succesfully. Your case number is ${property.get("CaseNumber")}`;
+                    response.say(text);
+                } else {
+                    response.say(`Sorry, I was not able to create your case. Please take a coffee and come back`);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                response.say("Oops. Something went wrong");
+            });
+
+       /* salesforce.findProperties({city: session.attributes.city, bedrooms: session.attributes.bedrooms, priceMin: priceMin, priceMax: priceMax})
             .then(properties => {
                 if (properties && properties.length>0) {
                     let text = `OK, here is what I found for ${session.attributes.bedrooms} bedrooms in ${session.attributes.city} around $${price}: `;
@@ -42,8 +63,9 @@ exports.AnswerNumber = (slots, session, response) => {
             .catch((err) => {
                 console.error(err);
                 response.say("Oops. Something went wrong");
-            });
-    } else {
+            }); */
+    } 
+    else {
         response.say("Sorry, I didn't understand that");
     }
 };

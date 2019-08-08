@@ -94,15 +94,15 @@ let findPriceChanges = () => {
 };
 
 
-let createCase = (propertyId, customerName, customerId) => {
+let createCase = (subject, description, priority) => {
 
     return new Promise((resolve, reject) => {
         let c = nforce.createSObject('Case');
-        c.set('subject', `Contact ${customerName} (Facebook Customer)`);
-        c.set('description', "Facebook id: " + customerId);
-        c.set('origin', 'Facebook Bot');
+        c.set('subject', subject);
+        c.set('description', description);
+        c.set('origin', 'Alexa');
         c.set('status', 'New');
-        c.set('Property__c', propertyId);
+        c.set('Property__c', priority );
 
         org.insert({sobject: c}, err => {
             if (err) {
