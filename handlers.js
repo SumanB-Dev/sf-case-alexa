@@ -26,6 +26,7 @@ exports.AnswerDesription = (slots, session, response) => {
     else {
         response.say("Sorry, I didn't understand that");
     }
+};
     
 exports.AnswerPriority = (slots, session, response) => {    
     if (session.attributes.stage === "ask_priority") {
@@ -35,9 +36,9 @@ exports.AnswerPriority = (slots, session, response) => {
 
         //build salesforce logic here
         salesforce.createCase({subject: session.attributes.subject, description: session.attributes.description, priority: session.attributes.priority})
-            .then(case => {
-                if (case) {
-                    let text = `Now relax, your case has been logged succesfully. Your case number is ${property.get("CaseNumber")}`;
+            .then(createdCase => {
+                if (createdCase) {
+                    let text = `Now relax, your case has been logged succesfully. Your case number is ${createdCase.get("CaseNumber")}`;
                     response.say(text);
                 } else {
                     response.say(`Sorry, I was not able to create your case. Please take a coffee and come back`);
@@ -48,7 +49,7 @@ exports.AnswerPriority = (slots, session, response) => {
                 response.say("Oops. Something went wrong");
             });
 
-       /* salesforce.findProperties({city: session.attributes.city, bedrooms: session.attributes.bedrooms, priceMin: priceMin, priceMax: priceMax})
+       /*salesforce.findProperties({city: session.attributes.city, bedrooms: session.attributes.bedrooms, priceMin: priceMin, priceMax: priceMax})
             .then(properties => {
                 if (properties && properties.length>0) {
                     let text = `OK, here is what I found for ${session.attributes.bedrooms} bedrooms in ${session.attributes.city} around $${price}: `;
