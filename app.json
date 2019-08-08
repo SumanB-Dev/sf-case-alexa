@@ -1,6 +1,6 @@
 {
-  "name": "DreamHouse Alexa Skill",
-  "description": "Salesforce-powered Skill for Alexa in the sample app",
+  "name": "MyAssist Alexa Skill",
+  "description": "Salesforce-powered Skill for Alexa in the Case Management app",
   "env": {
     "SF_CLIENT_ID": {
       "description": "Consumer Key of your Salesforce Connected App",
