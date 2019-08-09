@@ -102,7 +102,7 @@ let createCase = (params) => {
         c.set('description', params.description);
         c.set('origin', 'Alexa');
         c.set('status', 'New');
-        c.set('Property__c', params.priority );
+        c.set('Priority', params.priority );
 
         org.insert({sobject:c}, (err, resp) => {
             if (err) {
