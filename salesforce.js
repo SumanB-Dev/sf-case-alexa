@@ -107,7 +107,7 @@ let createCase = (subject, description, priority) => {
         org.insert({sobject: c}, (err, resp) => {
             if (err) {
                 console.error(err);
-                reject("An error occurred while creating a case " + err);
+                reject("An error occurred while creating a case " + err+"=="+ c);
             } else {
                 resolve(c);
             }
