@@ -104,10 +104,10 @@ let createCase = (subject, description, priority) => {
         c.set('status', 'New');
         c.set('Property__c', priority );
 
-        org.insert({sobject: c}, (err, resp) => {
+        org.insert({sobject:c}, (err, resp) => {
             if (err) {
                 console.error(err);
-                reject("An error occurred while creating a case " + err+"=="+ c);
+                reject("An error occurred while creating a case " + err+"=="+ c+subject+description+priority);
             } else {
                 resolve(c);
             }
