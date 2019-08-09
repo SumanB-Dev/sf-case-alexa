@@ -94,20 +94,20 @@ let findPriceChanges = () => {
 };
 
 
-let createCase = (subject, description, priority) => {
+let createCase = (params) => {
 
     return new Promise((resolve, reject) => {
         let c = nforce.createSObject('Case');
-        c.set('subject', subject);
-        c.set('description', description);
+        c.set('subject', params.subject);
+        c.set('description', params.description);
         c.set('origin', 'Alexa');
         c.set('status', 'New');
-        c.set('Property__c', priority );
+        c.set('Property__c', params.priority );
 
         org.insert({sobject:c}, (err, resp) => {
             if (err) {
                 console.error(err);
-                reject("An error occurred while creating a case " + err+"=="+ c+subject+description+priority);
+                reject("An error occurred while creating a case " + err+"=="+ c+params.subject+params.description+params.priority);
             } else {
                 resolve(c);
             }
