@@ -10,17 +10,17 @@ exports.CreateCase = (slots, session, response) => {
 
 exports.AnswerLiteral = (slots, session, response) => {
     if (session.attributes.stage === "ask_subject") {
-        session.attributes.subject = slots.Subject.value;
+        session.attributes.subject = slots.Text.value;
         session.attributes.stage = "ask_description";
         response.ask("Allright! Now please give me brief description of your problem");
     } 
     else if (session.attributes.stage === "ask_description") {
-        session.attributes.description = slots.Description.value;
+        session.attributes.description = slots.Text.value;
         session.attributes.stage = "ask_priority";
         response.ask("What is priority for this ? High, Medium or Low");
     }
     else if (session.attributes.stage === "ask_priority") {
-        let priority = slots.Priority.value;
+        let priority = slots.Text.value;
         session.attributes.priority = priority;
         //build salesforce logic here
         salesforce.createCase({subject: session.attributes.subject, description: session.attributes.description, priority: session.attributes.priority})
