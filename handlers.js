@@ -33,7 +33,7 @@ exports.AnswerLiteral = (slots, session, response) => {
             })
             .catch((err) => {
                 console.error(err);
-                response.say("Oops. Something went wrong");
+                response.say("Oops. Something went wrong"+ err);
             });
     }  
     else{
