@@ -20,14 +20,16 @@ app.post('/myassist', (req, res) => {
 
     if (type === 'LaunchRequest') {
         response.say("Welcome to My Assist");
-    } else if (type === 'IntentRequest') {
+    } 
+    else if (type === 'IntentRequest') {
         let handler = handlers[intent];
         if (handler) {
             handler(slots, session, response);
         } else {
-            response.say("I don't know how to answer that");
+            response.say("I don't know how to answer that " + intent);
         }
-    } else {
+    } 
+    else {
         response.say("Not sure what you mean");
     }
 
