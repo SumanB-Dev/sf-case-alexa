@@ -4,7 +4,6 @@ let salesforce = require("./salesforce");
 
 exports.CreateCase = (slots, session, response) => {
     session.attributes.stage = "ask_subject";
-    session.withShouldEndSession(false);
     response.ask("OK,Please help me with some information. Tell me the subjcet for the case");
 };
 
