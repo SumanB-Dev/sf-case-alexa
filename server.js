@@ -26,7 +26,7 @@ app.post('/myassist', (req, res) => {
         if (handler) {
             handler(slots, session, response);
         } else {
-            response.say("I don't know how to answer that " + intent);
+            response.say("I don't know how to answer that " + type);
         }
     } 
     else {
