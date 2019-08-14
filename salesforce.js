@@ -63,6 +63,7 @@ let findProperties = (params) => {
 
 };
 
+//Find Price
 let findPriceChanges = () => {
     return new Promise((resolve, reject) => {
         let q = `SELECT
